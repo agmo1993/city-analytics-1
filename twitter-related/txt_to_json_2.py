@@ -4,24 +4,24 @@ json_file_path = "harvested.json"
 txt_file_path = 'harvested.txt'
 
 json_file = open(json_file_path, "w")
-json_file.write('{"new_edits": false,\n')
-json_file.write('"docs":[\n')
+data = {}
 
-with open(txt_file_path, "r") as file:
+data["docs"] = []
+file = open(txt_file_path, "r")
     
-    while True:
-        try:
-            newTweet = file.readline()
-            
-            if newTweet:
-                json.loads(newTweet)
-                json_file.write(newTweet[:-1] + ',\n')
+while True:
+    try:
+        newTweet = file.readline()
+        
+        if newTweet:
+            loaded_tweet = json.loads(newTweet)
+            data["docs"].append(loaded_tweet)
 
-            else:
-                break
-  
-        except:
-            json_file.write('{"content" : "corrupted"},\n')
+        else:
+            break
+
+    except:
+        break
             
-json_file.write('{"dummy" : "tweet"}]}')
+json.dump(data, json_file_path)
 json_file.close()

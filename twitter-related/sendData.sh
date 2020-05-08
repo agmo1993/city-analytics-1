@@ -1,7 +1,5 @@
 #!/bin/sh
 
-python tweet_stream.py
-
 while true
 do
 python txt_to_json.py

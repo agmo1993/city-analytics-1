@@ -13,7 +13,7 @@ class Listener(StreamListener):
 
     def on_data(self, data):
         try:
-            with open("harvested_tweets.json", 'a') as file:
+            with open("harvested.txt", 'a') as file:
                 file.write(data[:-2] + ',')
 
         except Exception as e:
@@ -44,7 +44,7 @@ if __name__ == '__main__':
         except Exception as e:
             with open("error_log.txt", 'a') as file2:
                 file2.write(str(e) + '\n')
-            with open("harvested_tweets.json", 'a') as file:
+            with open("harvested.txt", 'a') as file:
                 file.write('{"dummy" : "tweet"}]}')
         
 

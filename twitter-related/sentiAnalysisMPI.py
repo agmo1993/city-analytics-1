@@ -30,7 +30,7 @@ def sentiment_analysis(text):
     return sentiment
 
 filehandle = open("db.json", 'r')
-txt_file_path = 'processed.json'
+txt_file_path = 'processedMPI.json'
 json_file_path = open(txt_file_path.format(count), "w")
 json_file_path.write("{ docs:[\n")
 

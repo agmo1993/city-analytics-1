@@ -22,9 +22,9 @@ def sentiment_analysis(text):
 
 filehandle = open("db.json", 'r')
 txt_file_path = 'processed.json'
-data = {}
-data["docs"] = []
-json_file_path = open(txt_file_path, "w")
+json_file_path = open(txt_file_path.format(count), "w")
+json_file_path.write("{ docs:[\n")
+
 count = 0
 while True:
     line = filehandle.readline()
@@ -37,11 +37,7 @@ while True:
         line_dict = json.loads(line)
         sentence = line_dict['doc']['text']
         line_dict['sentiment'] = sentiment_analysis(sentence)
-        print(line_dict['sentiment'])
-        data["docs"].append(line_dict)
-        count += 1
-        if count > 5:
-            break
+        json_file_path.write(str(line_dict) + ",\n")
 
-json.dump(data, json_file_path)
+json_file_path.write("]}")
 json_file_path.close()

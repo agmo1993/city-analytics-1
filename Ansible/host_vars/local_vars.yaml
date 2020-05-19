@@ -1,0 +1,86 @@
+---
+#############################################
+#              Common vars                  #
+#############################################
+availability_zone: melbourne-qh2-uom
+instance_network: qh2-uom-internal
+instance_flavor: uom.mse.2c9g
+instance_image: 41a92d84-b2d4-4529-b729-1fb92153f0f0 # Ubuntu 16.04
+instance_key_name: agmo # ssh private key
+
+#############################################
+#             Security group                #
+#############################################
+security_groups:
+  - name: http
+    description: "security group for http"
+    rules:
+      - name: 'Any'
+        protocol: tcp
+        port_range_min: 80
+        port_range_max: 80
+        remote_ip_prefix: 0.0.0.0/0
+  - name: ssh
+    description: "security group for ssh"
+    rules:
+      - name: 'Any'
+        protocol: tcp
+        port_range_min: 22
+        port_range_max: 22
+        remote_ip_prefix: 0.0.0.0/0
+  - name: couchdb1
+    description: "first security group for couchdb"
+    rules:
+      - name: 'Any'
+        protocol: tcp
+        port_range_min: 5984
+        port_range_max: 5984
+        remote_ip_prefix: 0.0.0.0/0
+  - name: couchdb2
+    description: "second security group for couchdb"
+    rules:
+      - name: 'Any'
+        protocol: tcp
+        port_range_min: 4369
+        port_range_max: 4369
+        remote_ip_prefix: 0.0.0.0/0
+  - name: couchdb3
+    description: "third security group for couchdb"
+    rules:
+      - name: 'Any'
+        protocol: tcp
+        port_range_min: 9100
+        port_range_max: 9200
+        remote_ip_prefix: 0.0.0.0/0
+
+
+
+#############################################
+#                Instance                   #
+#############################################
+instances:
+  - name: instance1
+    security_groups: [http,ssh,couchdb1,couchdb2,couchdb3]
+    volume_ids: '{{ instance1_volumes|default([]) }}'
+    volumes:
+      - vol_name: volume_db1
+        vol_size: 80
+        device: /dev/vdb
+        mountpoint: /data
+  - name: instance2
+    security_groups: [http,ssh,couchdb1,couchdb2,couchdb3]
+    volume_ids: '{{ instance2_volumes|default([]) }}'
+    volumes:
+      - vol_name: volume_db2
+        vol_size: 80
+        device: /dev/vdb
+        mountpoint: /data
+  - name: instance3
+    security_groups: [http,ssh,couchdb1,couchdb2,couchdb3]
+    volume_ids: '{{ instance3_volumes|default([]) }}'
+    volumes:
+      - vol_name: volume_db3
+        vol_size: 80
+        device: /dev/vdb
+        mountpoint: /data
+

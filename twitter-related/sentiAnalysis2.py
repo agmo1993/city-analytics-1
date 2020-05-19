@@ -19,25 +19,40 @@ def sentiment_analysis(text):
         sentiment += afinn.score(word)
     return sentiment
 
-filehandle = open("db.json", 'r')
-txt_file_path = 'processed.json'
-json_file_path = open(txt_file_path, "w")
-json_file_path.write("{ docs:[\n")
 
+comm = MPI.COMM_WORLD
+size = comm.Get_size()
+rank = comm.Get_rank()
 
-while True:
-    line = filehandle.readline()
-    if not line:
-        break
-    if "text" in line:
-        line = line.strip("\n")
-        line = line.rstrip()
-        line = line.rstrip(",")
-        line_dict = json.loads(line)
-        sentence = line_dict['doc']['text']
-        line_dict['sentiment'] = sentiment_analysis(sentence)
-        json_file_path.write(str(line_dict) + ",\n")
+file_out = open('processed-' + rank + '.json', "w")
+file_out.write("{ docs:[\n")
 
-json_file_path.write("]}")
-json_file_path.close()
+with open('db.json', 'r') as file_in:
 
+    while True:
+        
+        try:
+            newTweet = file_in.readline()
+            distributor += 1
+            
+            if newTweet:
+
+                if distributor % size == rank:
+                    
+                    tweetString = newTweet[:-2]
+                    tweetJson = json.loads(tweetString)
+
+                    tweetJson['sentiment'] = sentiment_analysis(tweetJson['doc']['text'])
+                    
+                    file_out.write(str(tweetJson) + ",\n")
+
+                else:
+                    continue
+    
+            else:
+                file_out.write("]}")
+                file_out.close()
+                break
+        
+        except:
+            print('error')

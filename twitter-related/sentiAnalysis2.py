@@ -6,7 +6,8 @@ import json
 import re
 import nltk
 from mpi4py import MPI
-
+nltk.download('stopwords')
+nltk.download('punkt')
 
 afinn = Afinn()
 stop_words = set(stopwords.words('english'))
@@ -25,8 +26,9 @@ def sentiment_analysis(text):
 comm = MPI.COMM_WORLD
 size = comm.Get_size()
 rank = comm.Get_rank()
+distributor = 0
 
-file_out = open('processed-' + rank + '.json', "w")
+file_out = open('processed-' + str(rank) + '.json', "w")
 file_out.write("{ docs:[\n")
 
 with open('db.json', 'r') as file_in:
@@ -56,5 +58,5 @@ with open('db.json', 'r') as file_in:
                 file_out.close()
                 break
         
-        except:
-            print('error')
+        except Exception as e:
+            print(str(e))

@@ -5,6 +5,8 @@ from textblob import Word
 import json
 import re
 import nltk
+from mpi4py import MPI
+
 
 afinn = Afinn()
 stop_words = set(stopwords.words('english'))

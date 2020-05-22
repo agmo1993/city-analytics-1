@@ -48,3 +48,22 @@
     state: latest
     install_recommends: no
     update_cache: yes
+
+- name: Configure compose
+  tags: 'couchdb'
+  become: yes
+  template:
+    src: docker-compose.yaml
+    dest: "{{ couchdb_config_path }}/docker-compose.yaml"
+    owner: ubuntu
+    group: ubuntu
+
+- name: Run docker compose
+  tags: 'couchdb'
+  become: yes
+  docker-service:
+    project_src: "{{ couchdb_config_path }}"
+    pull: yes
+    stat: present
+    remove_orphans: yes
+    recreate: always

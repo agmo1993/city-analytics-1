@@ -1,0 +1,4 @@
+---
+volumes:
+  - mountpoint: /dev/vdb
+  - mountpoint: /data

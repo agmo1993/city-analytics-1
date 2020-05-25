@@ -5,7 +5,7 @@
 availability_zone: melbourne-qh2-uom
 instance_network: qh2-uom-internal
 instance_flavor: uom.mse.2c9g
-instance_image: 41a92d84-b2d4-4529-b729-1fb92153f0f0 # Ubuntu 16.04
+instance_image: 45225edb-66d8-4fd0-bf41-132a31a18166 # Ubuntu 18.04
 instance_key_name: agmo # ssh private key
 
 #############################################
@@ -56,12 +56,12 @@ security_groups:
 # Volume
 volumes:
   - vol_name: volume_addition{{ addition_instance }}
-    vol_size: 80
+    vol_size: 20
 
 #############################################
 #                Instance                   #
 #############################################
 instances:
-  - name: instanceaddition{{ addition_instance }}
+  - name: '{{ addition_instance }}'
     security_groups: [http,ssh,couchdb1,couchdb2,couchdb3]
-    volume_ids: volume_addition{{ addition_instance }}
+    volumes: ['volume_addition{{ addition_instance }}']

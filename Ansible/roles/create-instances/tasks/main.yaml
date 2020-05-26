@@ -32,10 +32,38 @@
 - name: Create inventory file
   copy:
     content: "[all:vars]\nansible_user=ubuntu\n\n[dbServers:children]\ndbMaster\ndbSlave\n\n[dbMaster:children]\ninstance1\n\n[dbSlave:children]\ninstance2\ninstance3\n\n"
-    dest: "{{project_working_directory}}/city-analytics/Ansible/inventory/hosts.ini"
+    dest: "./inventory/hosts.ini"
 
 - name: set ip addresses to inventory file
   lineinfile:
     line: "[{{ item.name }}]\n{{ item.ip }}\n"
-    dest: "{{project_working_directory}}/city-analytics/Ansible/inventory/hosts.ini"
+    dest: "./inventory/hosts.ini"
   loop: '{{ ip_addresses }}'
+
+- name: Adding manager1 (leader)
+  lineinfile:
+    line: "[leader]\n{{ item.ip }}\n"
+    dest: "./inventory/hosts.ini"
+  when: item.name == "instance1_fresh"
+  loop: '{{ ip_addresses }}'
+
+- name: Adding manager2
+  lineinfile:
+    line: "[managers]\n{{ item.ip }}\n"
+    dest: "./inventory/hosts.ini"
+  when: item.name == "instance2"
+  loop: '{{ ip_addresses }}'
+
+- name: Adding manager3
+  lineinfile:
+    line: "{{ item.ip }}\n"
+    dest: "./inventory/hosts.ini"
+  when: item.name == "instance3"
+  loop: '{{ ip_addresses }}'
+
+# - name: Adding worker
+#   lineinfile:
+#     line: "[workers]\n{{ item.ip }}\n"
+#     dest: "./inventory/hosts.ini"
+#   when: item.name == "instance4"
+#   loop: '{{ ip_addresses }}'

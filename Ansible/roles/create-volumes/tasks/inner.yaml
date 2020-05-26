@@ -19,7 +19,7 @@
   loop: "{{ os_vol.results }}"
   when: outer_item.name == "instance2"
 
-  - name: Create a list of volume Ids | instance3
+- name: Create a list of volume Ids | instance3
   set_fact:
     instance3_volumes: "{{ instance3_volumes|default([]) + [ item.id ] }}"
   loop: "{{ os_vol.results }}"
@@ -29,4 +29,4 @@
   set_fact:
     instance1_volumes: "{{ instance1_volumes|default([]) + [ item.id ] }}"
   loop: "{{ os_vol.results }}"
-  when: outer_item.name == "instance1"
+  when: outer_item.name == "instance1_fresh"

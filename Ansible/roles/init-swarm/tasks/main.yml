@@ -1,0 +1,29 @@
+- name: "Init docker swarm in leader node"
+  shell: "sudo docker swarm init --advertise-addr {{ leader }}"
+
+- debug:
+    msg: "| Swarm initialised in ==> {{ leader }}"
+
+- name: "Get token for managers"
+  shell: sudo docker swarm join-token -q manager
+  register: manager_token
+
+# - name: Create inventory file
+#   lineinfile:
+#     line: "manager_token: {{ manager_token.stdout }}\n\n"
+#     dest: "host_vars/vars.yaml"
+
+- debug:
+    msg: "Manager token generated and saved in hosts file"
+
+- name: "Get token for workers"
+  shell: sudo docker swarm join-token -q worker
+  register: worker_token
+
+# - name: Create inventory file
+#   lineinfile:
+#     line: "worker_token: {{ worker_token.stdout }}\n\n"
+#     dest: "host_vars/vars.yaml"
+
+- debug:
+    msg: "Worker token generated and saved in hosts file"

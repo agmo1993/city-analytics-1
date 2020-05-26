@@ -13,10 +13,25 @@
     state: directory
   when: docker_service_dir.stat.exists == false
 
+- name: Create directory 2
+  become: yes
+  file:
+    path: '~/.docker'
+    recurse: yes
+    state: directory
+
+- name: Open docker daemon
+  become: yes
+  file:
+    path: ~/.docker
+    owner: root
+    group: root
+    mode: '+r'
+
 - name: change docker proxy | step 2
   become: yes
   copy:
-    content: "[Service]\nEnvironment=\"HTTP_PROXY={{ proxy_address }}\""
+    content: "[Service]\nEnvironment=\"HTTP_PROXY={{ proxy_address }}\"\nEnvironment=\"NO_PROXY={{no_proxy_address}}\""
     dest: /etc/systemd/system/docker.service.d/http-proxy.conf
 
 - name: change docker proxy | step 3
@@ -43,8 +58,9 @@
     dest: ~/.docker/config.json
 
 - name: Open docker daemon
+  become: yes
   file:
     path: /var/run/docker.sock
-    owner: foo
-    group: foo
+    owner: root
+    group: root
     mode: '666'

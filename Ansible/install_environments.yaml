@@ -1,11 +1,13 @@
 ---
-- hosts: all
+- hosts: 
+    - instance1_fresh
+    - instance2
+    - instance3
   vars_files:
-    - host_vars/local_vars.yaml
-    - host_vars/remote_vars.yaml
+    - host_vars/vars.yaml
   gather_facts: true
   roles:
     - role: install-environments
     - role: network-penetration
     - role: mount-volume
-    - role: couchdb-cluster
+    # - role: couchdb-cluster

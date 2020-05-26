@@ -1,0 +1,5 @@
+- name: clone from github
+  shell: git clone https://isaacpedroza:githubip.14@github.com/agmo1993/city-analytics.git
+
+- debug:
+    msg: "Git repository cloned"

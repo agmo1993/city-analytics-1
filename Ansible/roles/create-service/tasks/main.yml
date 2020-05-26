@@ -1,0 +1,5 @@
+- name: "Create service"
+  shell: sudo docker service create --replicas 3 -p 8081:80 --name website isaacpedroza/city-analytics:website
+
+- debug:
+    msg: "| Service created by ==> {{ ansible_eth0['ipv4']['address'] }}"

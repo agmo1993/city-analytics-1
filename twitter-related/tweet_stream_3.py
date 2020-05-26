@@ -1,9 +1,8 @@
-
 from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 from tweepy import Stream
 import json
- 
+
 ACCESS_TOKEN = '1251843024440528896-Ap9IxW0TbyLbN9XcQjc00Pc6ox9T0z'
 ACCESS_TOKEN_SECRET = 'pMyWWJ6AsuAaP9Yi2Mjwql3NGWKvZc8nOoPKbl4op4l8S'
 CONSUMER_KEY = 'bpOrX6SJQ73qOFXxy65AZ3uRA'
@@ -13,7 +12,7 @@ class Listener(StreamListener):
 
     def on_data(self, data):
         try:
-            with open("harvested_tweets.json", 'a') as file:
+            with open("harvested.txt", 'a') as file:
                 file.write(data)
 
         except Exception as e:
@@ -21,11 +20,11 @@ class Listener(StreamListener):
                 file2.write(str(e) + '\n')
 
         return True
-          
+
     def on_error(self, status):
         print(status)
 
- 
+
 if __name__ == '__main__':
 
     while True:

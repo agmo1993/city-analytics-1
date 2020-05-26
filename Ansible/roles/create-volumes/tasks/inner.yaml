@@ -21,7 +21,7 @@
 
   - name: Create a list of volume Ids | instance3
   set_fact:
-    instance1_volumes: "{{ instance3_volumes|default([]) + [ item.id ] }}"
+    instance3_volumes: "{{ instance3_volumes|default([]) + [ item.id ] }}"
   loop: "{{ os_vol.results }}"
   when: outer_item.name == "instance3"
 

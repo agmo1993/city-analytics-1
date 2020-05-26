@@ -1,5 +1,5 @@
 function (doc) {
-  var climate = ['jobseeker','unemployment','centrelink','jobkeeper'];
+  var climate = ['jobseeker','unemployment','centrelink','jobkeeper','welfare'];
   var words = doc.text.toLowerCase().split(/\W+/);
   var words2 = doc.extended_tweet.full_text.toLowerCase().split(/\W+/);
   if ((words.filter(value => climate.includes(value))).length > 0 && (doc.sentiment < 0)){

@@ -19,6 +19,7 @@ RUN echo ${ip_address} && \
     pip3 install pandas && \
     pip3 install cloudant && \
     chmod +x htmlupdated.sh && \
-    ./htmlupdated.sh ${ip_address}
+    pip3 install shapely && \
+    python3 map.py ${ip_address}
 
 CMD nginx -g 'daemon off;'

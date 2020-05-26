@@ -4,9 +4,11 @@ ENV WELCOME_STRING "nginx in Docker"
 
 WORKDIR /usr/share/nginx/html
 
-COPY ["/city-analytics/nginx-webserver/front-end/map.py", "/usr/share/nginx/html"]
+COPY ["/city-analytics/nginx-webserver/front-end", "/usr/share/nginx/html"]
 
-EXPOSE 8081
+EXPOSE 80
+
+ARG ip_address
 
 RUN cp index.html index_backup.html; \
     apt-get update && apt-get install -qy vim; \
@@ -15,6 +17,8 @@ RUN cp index.html index_backup.html; \
     pip3 install folium && \
     pip3 install pandas && \
     pip3 install cloudant && \
-    python3 map.py
+    apt-get install nohup && \
+    chmod +x htmlupdated.sh && \
+    ./htmlupdated.sh ${ip_address}
 
 CMD nginx -g 'daemon off;'

@@ -15,6 +15,7 @@ RUN echo ${ip_address} && \
     apt-get update && apt-get install -qy vim; \
     apt-get install -y python3 && \
     apt-get install -y python3-pip && \
+    apt-get install nohup && \
     pip3 install folium && \
     pip3 install pandas && \
     pip3 install cloudant && \

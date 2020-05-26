@@ -1,0 +1,17 @@
+#!/bin/sh
+
+cd 
+
+export user=admin
+export pass=admin
+export node=$(hostname -I | awk '{print $1}')
+export cookie='a192aeb9904e6590849337933b000c99'
+export VERSION='3.0.0'
+docker pull ibmcom/couchdb3:${VERSION}
+export masternode=$1
+echo $masternode
+
+curl -XPOST "http://${user}:${pass}@${masternode}:5984/_cluster_setup"\
+      --header "Content-Type: application/json"\
+      --data "{\"action\": \"add_node\", \"host\":\"${node}\",\
+             \"port\": \"5984\", \"username\": \"${user}\", \"password\":\"${pass}\"}"

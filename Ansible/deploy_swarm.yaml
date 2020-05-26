@@ -1,0 +1,29 @@
+- hosts: leader
+  vars_files:
+    - host_vars/vars.yaml
+  gather_facts: true
+  roles:
+    # - role: clone-git-repo
+    - role: init-swarm
+    - role: build-website-image
+
+- hosts: managers
+  vars_files:
+    - host_vars/vars.yaml
+  gather_facts: true
+  roles:
+    - role: clone-git-repo
+    - role: join-swarm-manager
+
+# - hosts: worker
+#   gather_facts: true
+#   roles:
+#     - role: clone-git-repo
+#     - role: join-swarm-worker
+
+- hosts: leader
+  vars_files:
+    - host_vars/vars.yaml
+  gather_facts: true
+  roles:
+    - role: create-service

@@ -4,7 +4,7 @@ ENV WELCOME_STRING "nginx in Docker"
 
 WORKDIR /usr/share/nginx/html
 
-COPY ["/front-end/map.py", "/usr/share/nginx/html"]
+COPY ["/city-analytics/nginx-webserver/front-end/map.py", "/usr/share/nginx/html"]
 
 EXPOSE 8081
 

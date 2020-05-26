@@ -1,0 +1,23 @@
+- name: "Docker login"
+  shell: sudo docker login -u isaacpedroza -p dockerhub
+
+- debug:
+    msg: "Docker Login done"
+
+- name: "Build image"
+  shell: sudo docker build -t website -f city-analytics/nginx-webserver/Dockerfile .
+
+- debug:
+    msg: "Image built"
+
+- name: "Tag image"
+  shell: sudo docker tag website isaacpedroza/city-analytics:website
+
+- debug:
+    msg: "Image tagged"
+
+- name: "Push image"
+  shell: sudo docker push isaacpedroza/city-analytics:website
+
+- debug:
+    msg: "Image pushed to docker register"

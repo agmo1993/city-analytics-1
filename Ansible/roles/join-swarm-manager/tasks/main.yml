@@ -1,0 +1,5 @@
+- name: "Join swarm as manager"
+  shell: sudo docker swarm join --token {{ hostvars['leader']['manager_token']['stdout'] }} {{ hostvars['leader'] }}:2377
+
+- debug:
+    msg: "| Joined the swarm as a manager ==> {{ ansible_eth0['ipv4']['address'] }}"

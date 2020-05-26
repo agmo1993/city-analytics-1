@@ -9,5 +9,5 @@
   roles:
     - role: install-environments
     - role: network-penetration
-    - role: mount-volume
+    # - role: mount-volume
     # - role: couchdb-cluster

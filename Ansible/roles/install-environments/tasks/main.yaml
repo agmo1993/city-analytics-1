@@ -2,17 +2,9 @@
 - name: add proxy to enviroments
   become: yes
   lineinfile:
-    line: "http_proxy=\"{{ proxy_address }}\"\nhttps_proxy=\"{{ proxy_address }}\"\nftp_proxy=\"{{ proxy_address }}\"\nno_proxy=\"localhost,127.0.0.1,127.0.1.1,0.0.0.0,ubuntu,instance1\"\n"
+    line: "http_proxy=\"{{ proxy_address }}\"\nhttps_proxy=\"{{ proxy_address }}\"\nftp_proxy=\"{{ proxy_address }}\"\nno_proxy=\"{{no_proxy_address}}\"\n"
     dest: /etc/environment
 
-- name: make proxy available for current session
-  become: yes
-  shell: echo 'add proxy configuration success'
-  environment:
-    http_proxy: "{{ proxy_address }}"
-    https_proxy: "{{ proxy_address }}"
-    ftp_proxy: "{{ proxy_address }}"
-    no_proxy: "localhost,127.0.0.1,127.0.1.1,0.0.0.0,ubuntu,instance1"
 # add proxy configuration
 
 - name: Update apt

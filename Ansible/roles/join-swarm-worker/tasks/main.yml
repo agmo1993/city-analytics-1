@@ -1,5 +1,5 @@
 - name: "Join swarm as worker"
-  shell: sudo docker swarm join --token {{ hostvars['worker_token'] }} {{ hostvars['leader'] }}:2377
+  shell: sudo docker swarm join --token {{ worker_token }} {{ leader }}:2377
 
 - debug:
     msg: "| Joined the swarm as a worker ==> {{ ansible_eth0['ipv4']['address'] }}"

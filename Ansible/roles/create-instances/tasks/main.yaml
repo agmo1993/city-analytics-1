@@ -40,21 +40,28 @@
     dest: "./inventory/hosts.ini"
   loop: '{{ ip_addresses }}'
 
-- name: Adding manager1 (leader)
+- name: Adding manager1 (leader) IP to the hosts file
   lineinfile:
     line: "[leader]\n{{ item.ip }}\n"
     dest: "./inventory/hosts.ini"
   when: item.name == "instance1_fresh"
   loop: '{{ ip_addresses }}'
 
-- name: Adding manager2
+- name: Adding manager1 (leader) IP to the host variables file
+  lineinfile:
+    line: "leader: {{ item.ip }}\n"
+    dest: "./host_vars/vars.yaml"
+  when: item.name == "instance1_fresh"
+  loop: '{{ ip_addresses }}'
+
+- name: Adding manager2 IP to the hosts file
   lineinfile:
     line: "[managers]\n{{ item.ip }}\n"
     dest: "./inventory/hosts.ini"
   when: item.name == "instance2"
   loop: '{{ ip_addresses }}'
 
-- name: Adding manager3
+- name: Adding manager3 IP to the hosts file
   lineinfile:
     line: "{{ item.ip }}\n"
     dest: "./inventory/hosts.ini"

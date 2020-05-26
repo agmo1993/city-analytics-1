@@ -7,23 +7,23 @@
 - name: "Get token for managers"
   shell: sudo docker swarm join-token -q manager
   register: manager_token
+- debug: var=manager_token
 
-# - name: Create inventory file
-#   lineinfile:
-#     line: "manager_token: {{ manager_token.stdout }}\n\n"
-#     dest: "host_vars/vars.yaml"
 
+- name: "write manager token"
+  shell: echo {{ manager_token.stdout }} >> city-analytics/manager_token.txt
+
+- name: git add manager token
+  shell: git add . && git commit -m "token" && git pull origin master && git push origin master
+  args:
+    chdir: "city-analytics/"
+  
 - debug:
     msg: "Manager token generated and saved in hosts file"
 
 - name: "Get token for workers"
   shell: sudo docker swarm join-token -q worker
   register: worker_token
-
-# - name: Create inventory file
-#   lineinfile:
-#     line: "worker_token: {{ worker_token.stdout }}\n\n"
-#     dest: "host_vars/vars.yaml"
 
 - debug:
     msg: "Worker token generated and saved in hosts file"

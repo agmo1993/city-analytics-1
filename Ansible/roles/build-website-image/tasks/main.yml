@@ -5,7 +5,7 @@
     msg: "Docker Login done"
 
 - name: "Build image"
-  shell: sudo docker build -t website -f city-analytics/nginx-webserver/Dockerfile .
+  shell: sudo docker build --build-arg ip_address={{ master_node }} -t website -f city-analytics/nginx-webserver/Dockerfile .
 
 - debug:
     msg: "Image built"

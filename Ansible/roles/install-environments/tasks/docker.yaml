@@ -20,10 +20,4 @@
     state: latest
     install_recommends: no
     update_cache: yes
-
-- name: Install docker-compose
-  become: yes
-  pip:
-    name: ['docker-compose']
-    version: 1.22.0
-    state: present  
+ 

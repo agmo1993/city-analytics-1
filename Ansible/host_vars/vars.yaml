@@ -4,14 +4,12 @@
 #############################################
 availability_zone: melbourne-qh2-uom
 instance_network: qh2-uom-internal
-instance_flavor: uom.mse.2c9g
-instance_image: 41a92d84-b2d4-4529-b729-1fb92153f0f0 # Ubuntu 16.04
+instance_flavor: uom.mse.1c4g
+instance_image: 45225edb-66d8-4fd0-bf41-132a31a18166 # Ubuntu 18.04
 instance_key_name: isaac # ssh private key
 
 proxy_address: http://wwwproxy.unimelb.edu.au:8000
 no_proxy_address: "localhost,127.0.0.1,localaddress,172.16.0.0/12,.melbourne.rc.nectar.org.au,.storage.u nimelb.edu.au,.cloud.unimelb.edu.au"
-
-leader: 172.26.131.184
 
 #############################################
 #                  Docker                   #
@@ -85,27 +83,34 @@ security_groups:
 #############################################
 instances:
   - name: instance1_fresh
-    security_groups: [http,ssh,couchdb1,couchdb2,couchdb3]
+    security_groups: [http_all,ssh,couchdb1,couchdb2,couchdb3]
     volume_ids: '{{ instance1_volumes|default([]) }}'
     volumes:
       - vol_name: volume_db1_fresh
-        vol_size: 50
+        vol_size: 30
         device: /dev/vdb
         mountpoint: /data
   - name: instance2
-    security_groups: [http,ssh,couchdb1,couchdb2,couchdb3]
+    security_groups: [http_all,ssh,couchdb1,couchdb2,couchdb3]
     volume_ids: '{{ instance2_volumes|default([]) }}'
     volumes:
       - vol_name: volume_db2
-        vol_size: 50
+        vol_size: 30
         device: /dev/vdb
         mountpoint: /data
   - name: instance3
-    security_groups: [http,ssh,couchdb1,couchdb2,couchdb3]
+    security_groups: [http_all,ssh,couchdb1,couchdb2,couchdb3]
     volume_ids: '{{ instance3_volumes|default([]) }}'
     volumes:
-      - vol_name: volume_db3
-        vol_size: 50
+      - vol_name: volume_db3_fresh
+        vol_size: 30
         device: /dev/vdb
         mountpoint: /data
+
+#############################################
+#                Leader IP                  #
+#############################################
+# leader: 172.26.131.184
+master_node: 172.26.129.225
+leader: 172.26.130.206
 

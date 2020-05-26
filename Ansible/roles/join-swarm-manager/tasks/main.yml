@@ -1,5 +1,15 @@
+- name: git pull repo
+  shell: git pull origin master
+  args:
+    chdir: "city-analytics/"
+
+- name: "Read token"
+  shell: tail -1 "city-analytics/manager_token.txt"
+  register: manager_token
+- debug: var=manager_token
+
 - name: "Join swarm as manager"
-  shell: sudo docker swarm join --token {{ hostvars['leader']['manager_token']['stdout'] }} {{ hostvars['leader'] }}:2377
+  shell: sudo docker swarm join --token {{ manager_token.stdout }} {{ leader }}:2377
 
 - debug:
     msg: "| Joined the swarm as a manager ==> {{ ansible_eth0['ipv4']['address'] }}"

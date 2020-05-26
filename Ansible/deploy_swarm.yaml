@@ -3,9 +3,8 @@
     - host_vars/vars.yaml
   gather_facts: true
   roles:
-    # - role: clone-git-repo
+    - role: clone-git-repo
     - role: init-swarm
-    - role: build-website-image
 
 - hosts: managers
   vars_files:
@@ -26,4 +25,5 @@
     - host_vars/vars.yaml
   gather_facts: true
   roles:
+    - role: build-website-image
     - role: create-service

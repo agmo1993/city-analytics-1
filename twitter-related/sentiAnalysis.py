@@ -7,14 +7,14 @@ import json
 import re
 import nltk
 
+afinn = Afinn()
+stop_words = set(stopwords.words('english'))
+
 def sentiment_analysis(text):
-    afinn = Afinn()
-    stop_words = set(stopwords.words('english')) 
     tokenized = word_tokenize(text.lower())
     sw_removed = [word for word in tokenized if not word in stop_words] 
     corrected = list()
-    for word in sw_removed:
-        corrected.append(Word(word).spellcheck()[0][0])
+    corrected = [ Word(w).spellcheck()[0][0] for w in sw_removed ]
     sentiment = 0
     for word in corrected:
         sentiment += afinn.score(word)

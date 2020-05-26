@@ -1,13 +1,14 @@
 #!/bin/sh
-
 while true
 do
-python txt_to_json.py
-
-curl -XPOST "http://${user}:${pass}@${masternode}:5984/twitter/_bulk_docs " --header "Content-Type: application/json"   --data @harvested.json
-
-rm harvested.json
+cp harvested.txt harvested2.txt
 rm harvested.txt
 
-sleep 60
+python3 txt_to_json_4.py
+
+curl -XPOST "http://admin:admin@172.26.129.225:5984/twitter/_bulk_docs " --header "Content-Type: application/json"   --data @harvested.json
+
+
+sleep 5
+rm harvested.json
 done

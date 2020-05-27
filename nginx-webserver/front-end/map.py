@@ -248,10 +248,10 @@ NAVBAR_HTML = '''
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li><a href="#">Home</a href="/map1.html"></li>
-        <li><a href="#">Scenario 1</a href="/map1.html"></li>
-        <li><a href="#">Scenario 2</a href="/map2.html"></li>
-        <li><a href="#">Scenario 3</a href="/map3.html"></li>
+        <li><a href="/map1.html">Home</a></li>
+        <li><a href="/map1.html">Scenario 1</a></li>
+        <li><a href="/map2.html">Scenario 2</a></li>
+        <li><a href="/map3.html">Scenario 3</a></li>
       </ul>
     </div>
   </div>

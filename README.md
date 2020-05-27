@@ -9,6 +9,10 @@ Sentiment analysis  is conducted on harvested  tweets originating in Victorian L
 2) relative affluence of a region and user preference regarding mobile device brands, and 
 3) overall negativity of tweets and the mental health of a region.  
 
+[Youtube video of front-end](https://youtu.be/KYnqNIVjCQw)
+[Youtube video of deployment](https://duckduckgo.com)
+
+
 ## System deployment
 
 The system was deployed using Ansible, a software provisioning tool which allows for ad-hoc task execution and configuration management. A long sequence of instructions was developed in an Ansible ‘playbook’, which is written in YAML. 

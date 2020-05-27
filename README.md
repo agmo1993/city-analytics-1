@@ -9,8 +9,9 @@ Sentiment analysis  is conducted on harvested  tweets originating in Victorian L
 2) relative affluence of a region and user preference regarding mobile device brands, and 
 3) overall negativity of tweets and the mental health of a region.  
 
-[Youtube video of front-end](https://youtu.be/KYnqNIVjCQw)
-[Youtube video of deployment](https://duckduckgo.com)
+[Front-end Demonstration](https://youtu.be/KYnqNIVjCQw)
+
+[Deployment Demonstration](https://duckduckgo.com)
 
 
 ## System deployment

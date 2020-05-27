@@ -49,7 +49,7 @@ This shell script runs the playbook called install_environments.yaml. Moreover, 
 This stage of the deployment creates the CouchDB containers of three of the instances and sets up the CouchDB cluster. The execution is performed by executing the following script, 
 
 ```
-./couch-setup.sh 
+./deploy-couch.sh 
 ```
 
 Once the containers are set up, the database is created, and the design documents are imported into the CouchDB database – where the views can be accessed. 

@@ -9,9 +9,9 @@ Sentiment analysis  is conducted on harvested  tweets originating in Victorian L
 2) relative affluence of a region and user preference regarding mobile device brands, and 
 3) overall negativity of tweets and the mental health of a region.  
 
-[Front-end Demonstration](https://youtu.be/KYnqNIVjCQw)
+[Front-end Demo](https://youtu.be/KYnqNIVjCQw)
 
-[Deployment Demonstration](https://duckduckgo.com)
+[Deployment Demo](https://youtu.be/uNOeLK6noFY)
 
 
 ## System deployment
@@ -28,7 +28,7 @@ The system was deployed using Ansible, a software provisioning tool which allows
 
 The first stage of the deployment was of the virtual machines (instances) on the MRC, coupled with the creation of the volumes associated with each instance. This can be executed with the following command: 
 ```
-./lanch-nectar.sh 
+./launch-nectar.sh 
 ```
 The command launches the playbook called launch-nectar.yaml, which creates the necessary security groups, creates the volumes and creates four instances. The instances are given the appropriate labels which will then be utilized later in the deployment sequence. These labels are whether the instance is a dbMaster or dbSlave (for CouchDB), a leader, manager or worker (for Docker Swarm). 
 

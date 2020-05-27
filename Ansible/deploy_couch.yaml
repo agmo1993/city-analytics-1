@@ -1,0 +1,17 @@
+---
+- hosts: 
+    - instance1_fresh
+  vars_files:
+    - host_vars/vars.yaml
+  gather_facts: true
+  roles:
+    - role: couchdb-cluster-master
+
+- hosts: 
+    - instance2
+    - instance3
+  vars_files:
+    - host_vars/vars.yaml
+  gather_facts: true
+  roles:
+    - role: couchdb-cluster

@@ -11,7 +11,6 @@
     path: '{{ couchdb_config_path }}'
     recurse: yes
     state: directory
-    mode: "u=rwX,g=rwX,o=rwX"
   when: couchdb_dir.stat.exists == false
 
 - name: copy docker config file to server | step 1
@@ -54,26 +53,12 @@
   tags: 'couchdb'
   become: yes
   template:
-    src: docker-create.sh.j2
-    dest: '{{ couchdb_config_path }}/docker-create.sh'
+    src: docker-create-master.sh.j2
+    dest: '{{ couchdb_config_path }}/docker-create-master.sh'
     owner: ubuntu
     group: ubuntu
     mode: a+x
-    
+
 - name: Run docker compose
-  shell: '{{ couchdb_config_path }}//docker-create.sh {{ leader }}' 
+  shell: '{{ couchdb_config_path }}/docker-create-master.sh {{ leader }}'
 
-- name: Configure compose
-  tags: 'couchdb'
-  become: yes
-  template:
-    src: cluster-create.sh.j2
-    dest: '{{ couchdb_config_path }}/cluster-create.sh'
-    owner: ubuntu
-    group: ubuntu
-    mode: a+x
-
-- name: Add to cluster
-  shell: ./cluster-create.sh {{ leader }}
-  args:
-    chdir: '{{ couchdb_config_path }}/'

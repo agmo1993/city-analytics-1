@@ -6,7 +6,13 @@ availability_zone: melbourne-qh2-uom
 instance_network: qh2-uom-internal
 instance_flavor: uom.mse.1c4g
 instance_image: 45225edb-66d8-4fd0-bf41-132a31a18166 # Ubuntu 18.04
-instance_key_name: isaac # ssh private key
+instance_key_name: agmo # ssh private key
+couchdb_config_path: /home/ubuntu/couchdb/etc
+cluster_cookie: 'a192aeb9904e6590849337933b000c99'
+cluster_communication_port_min: 9100
+cluster_communication_port_max: 9102
+couchdb_share: 4
+couchdb_replica: 3
 
 proxy_address: http://wwwproxy.unimelb.edu.au:8000
 no_proxy_address: "localhost,127.0.0.1,localaddress,172.16.0.0/12,.melbourne.rc.nectar.org.au,.storage.u nimelb.edu.au,.cloud.unimelb.edu.au"
@@ -110,7 +116,6 @@ instances:
 #############################################
 #                Leader IP                  #
 #############################################
-# leader: 172.26.131.184
-master_node: 172.26.129.225
-leader: 172.26.130.206
 
+leader: 172.26.130.254
+master_node: 172.26.129.225

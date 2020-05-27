@@ -1,7 +1,7 @@
-# City-Analytics - Cloud based Geospatial Analysis of Tweets in Victoria
-===
+## City-Analytics - Cloud based Geospatial Analysis of Tweets in Victoria
+
 ## Abstract
-===
+
 We designed and implement a cloud-based solution to collect, process, analyze, and visualize integrated multi-source data. The solution architecture successfully implements several leading heterogeneous technologies and is purposefully designed to be automated and scalable. The resultant system is leveraged to explore several scenarios regarding Australian society and lifestyle through the integration and geospatial analytics of publicly-available social-media data and official statistics.  
 
 Sentiment analysis  is conducted on harvested  tweets originating in Victorian Local Government Areas to identify  whether there exists a meaningful correlation between: 
@@ -10,7 +10,7 @@ Sentiment analysis  is conducted on harvested  tweets originating in Victorian L
 3) overall negativity of tweets and the mental health of a region.  
 
 ## System deployment
-===
+
 The system was deployed using Ansible, a software provisioning tool which allows for ad-hoc task execution and configuration management. A long sequence of instructions was developed in an Ansible ‘playbook’, which is written in YAML. 
 
 + Deployment of virtual machines on the Melbourne Research Cloud (MRC) 
@@ -19,7 +19,7 @@ The system was deployed using Ansible, a software provisioning tool which allows
 + Installation and deployment of the Docker Swarm and the website 
 
 ### Deployment of virtual machines 
-===
+
 
 The first stage of the deployment was of the virtual machines (instances) on the MRC, coupled with the creation of the volumes associated with each instance. This can be executed with the following command: 
 ```
@@ -28,7 +28,7 @@ The first stage of the deployment was of the virtual machines (instances) on the
 The command launches the playbook called launch-nectar.yaml, which creates the necessary security groups, creates the volumes and creates four instances. The instances are given the appropriate labels which will then be utilized later in the deployment sequence. These labels are whether the instance is a dbMaster or dbSlave (for CouchDB), a leader, manager or worker (for Docker Swarm). 
 
 ### Installation of key environment dependencies  
-===
+
 
 The next stage of the deployment is the installation of the environments dependencies required for both the database and webserver applications, which was Docker. The execution of this step is performed with the following script, 
 ```
@@ -37,7 +37,7 @@ The next stage of the deployment is the installation of the environments depende
 This shell script runs the playbook called install_environments.yaml. Moreover, this playbook also performs key tasks to provide networking access to the instances, as well as the Docker containers and Docker Swarm launched on them. This was done by adding a series of proxy addresses to the environment variables.  
 
 ### Install and deployment of the CouchDB database cluster  
-===
+
 
 This stage of the deployment creates the CouchDB containers of three of the instances and sets up the CouchDB cluster. The execution is performed by executing the following script, 
 

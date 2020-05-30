@@ -19,12 +19,16 @@ Sentiment analysis  is conducted on harvested  tweets originating in Victorian L
 
 Instance 1
 http://172.26.129.225/map1.html
+
 Instance 2
 http://172.26.130.254/map1.html
+
 Instance 3
 http://172.26.134.129/map1.html
+
 Instance 4
 http://172.26.133.35/map1.html
+
 
 ## System deployment
 

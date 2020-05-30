@@ -13,7 +13,7 @@ Sentiment analysis  is conducted on harvested  tweets originating in Victorian L
 
 [Front-end Demo](https://youtu.be/KYnqNIVjCQw)
 
-[Deployment Demo](https://youtu.be/uNOeLK6noFY)
+[Scaling Demo](https://youtu.be/uNOeLK6noFY)
 
 
 ## System deployment
